@@ -1,0 +1,55 @@
+public class QueenBoard {
+    private int[][]board;
+    private int solutionCount;
+
+    public QueenBoard(int size) {
+	board = new int[size][size];
+	solutionCount = 0;
+	resetBoard();
+    }
+
+    public boolean solve() {
+	return solveH(0);
+    }
+
+    public boolean solveH(int col) {
+	if (col > size) {
+	    return true;
+	}
+	for (int row = 0;row < board.length;row++) {
+	    if (board[row][col] == 0) {
+		addQueen(row, col);
+	    }
+	}
+    }
+
+    private void resetBoard() { //sets all values of board to 0
+	for (int row : board[]) {
+	    for (int col : board[][]) {
+		board[row][col] = 0;
+	    }
+	}
+    }
+
+    private void addQueen(int row, int col) { //Given a location, sets the value to -1, adds +1 to all 8 directions
+	board[row][col] == -1;
+	int n = 0;
+	while (n < board.length) { //horizontal + vertical
+	    if (n != row) {
+		board[n][col] += 1;
+	    }
+	    if (n != col) {
+		board[row][n] += 1;
+	    }
+	    if (row - n >= 0 && col - n >= 0) {
+		board[row - n][col - n] += 1;
+	    }
+	    if (row + n < board.length && col + n < board.length) {
+		board[row + n][col + n] += 1;
+	    }
+	}
+    }
+}
+	    
+	    
+	
