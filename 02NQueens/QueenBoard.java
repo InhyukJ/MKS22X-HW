@@ -60,6 +60,9 @@ public class QueenBoard {
 	if (board.length == 2 || board.length == 3) {
 	    n = 0;
 	}
+	if (n != -1) {
+	    n += 1;
+	}
 	solutionCount = n;
     }
 
@@ -127,13 +130,14 @@ public class QueenBoard {
 	}
 	return ans;
     }
-
+    /*
     public static void main(String[]args) {
-	QueenBoard n = new QueenBoard(5);
+	QueenBoard n = new QueenBoard();
 	n.countSolutions();
 	int a = n.getSolutionCount();
 	System.out.println(a);
     }
+    */
 }
 	    
 	    
