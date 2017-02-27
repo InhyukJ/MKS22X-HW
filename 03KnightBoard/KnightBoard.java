@@ -62,11 +62,13 @@ public class KnightBoard {
 	}
 	return ans;
     }
-    
+
+    /*
     public static void main(String[]args) {
-	KnightBoard a = new KnightBoard(5, 4);
-	a.solve();
+	KnightBoard a = new KnightBoard(7,7);
 	System.out.println(a.solveH(0,0,1));
+	a.solve();
 	System.out.println(a);
     }
+    */
 }
