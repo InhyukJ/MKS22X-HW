@@ -16,7 +16,9 @@ public class ReadFile {
 	    else {
 		output += line + "\n";
 	    }
+	    lineNumber++;
         }
 	System.out.println(output);
+	System.out.println(lineNumber);
   }
 }

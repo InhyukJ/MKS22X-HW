@@ -8,14 +8,20 @@ public class Maze {
     public Maze(String filename) throws FileNotFoundException {
 	File infile = new File(filename);
 	Scanner inf = new Scanner(infile);
-	int rows = 1;
-	char[][] board = char[][];
+	int rows = 0;
+	int cols = 0;
+	String output = "";
 	while (inf.hasNextLine()) {
 	    String line = inf.nextLine();
-	    for (char letter : line) {
-		
+	    cols = line.length();
+	    rows++;
+	    output += line;
 	}
-	for (int row = 0;row < )
+
+	maze = new char[rows][cols];
+	for (int n = cols;n < line.length();n += cols) {
+	    
+		
 
     public Maze() throws FileNotFoundException {
 	File infile = new File("Maze1.txt");
