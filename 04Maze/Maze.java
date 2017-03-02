@@ -18,48 +18,84 @@ public class Maze {
 	    output += line;
 	}
 
-	maze = new char[rows][cols];
-	for (int n = cols;n < line.length();n += cols) {
-	    
-		
-
-    public Maze() throws FileNotFoundException {
-	File infile = new File("Maze1.txt");
-        Scanner inf = new Scanner(infile);
-        int lineNumber = 1;
-	String[][] board = new board[][];
-        while(inf.hasNextLine()){
-	    int nthline = 0;
-            String line = inf.nextLine();
-	    for (int n = 0;n < line.length();n++) {
-		board[nthline][n] = line[n];
+	if (output.indexOf('E') != -1) {
+	    if (output.indexOf('E', output.indexOf('E')+1) != -1) {
+		throw new BadFileException("There is more than one Exit");
 	    }
-	    nthline++;
+	}
+	else {
+	    throw new BadFileException("There is no Exit");
 	}
 	
-	maze = board;
-	startRow = 0;
-	startCol = 0;
-    }
-
-    public solve() {
-	findStart();
-	solveH(startRow, startCol);
-    }
-
-    private void findStart() {
-	for (int r = 0;r < maze.length;r++) {
-	    for (int c = 0;c < maze[r].length;c++) {
-		if (maze[r][c] == "S") {
-		    startRow = r;
-		    startCol = c;
-		}
+	if (output.indexOf('S') != -1) {
+	    if (output.indexOf('S', output.indexOf('S')+1) != -1) {
+		throw new BadFileException("There is more than one Start");
 	    }
 	}
-    }
-
-    private boolean solveH(int row, int col) {
-	if (maze[row][col] == "E") {
-	    return true;
+	else {
+	    throw new BadFileException("There is no Start");
 	}
-	if ()
+
+	maze = new char[rows][cols];
+	for (int n = 0;n < output.length();n++) {
+	    int tRow = n / cols;
+	    int tCol = n % cols;
+	    maze[tRow][tCol] = output.charAt(n);
+	}
+
+	animate = false;
+    }
+		
+    private void wait(int millis){ //ADDED SORRY!
+	try {
+	    Thread.sleep(millis);
+	}
+	catch (InterruptedException e) {
+	}
+    }
+    
+    public void setAnimate(boolean b){
+        animate = b;
+    }
+    
+    public void clearTerminal(){
+        //erase terminal, go to top left of screen.
+        System.out.println("\033[2J\033[1;1H");
+    }
+    
+    
+    /*Wrapper Solve Function
+      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
+    */
+    public boolean solve(){
+	int startr=-1,startc=-1;
+	//Initialize starting row and startint col with the location of the S. 
+	
+            maze[startr][startc] = ' ';//erase the S, and start solving!
+            return solve(startr,startc);
+    }
+    
+    /*
+      Recursive Solve function:
+      
+      A solved maze has a path marked with '@' from S to E.
+      
+      Returns true when the maze is solved,
+      Returns false when the maze has no solution.
+      
+      Postcondition:
+      The S is replaced with '@' but the 'E' is not.
+      All visited spots that were not part of the solution are changed to '.'
+      All visited spots that are part of the solution are changed to '@'
+    */
+    private boolean solve(int row, int col){
+        if(animate){
+            System.out.println("\033[2J\033[1;1H"+this);
+            wait(20);
+        }
+	
+        //COMPLETE SOLVE
+        return false; //so it compiles
+    }
+    
+}
