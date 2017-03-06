@@ -20,20 +20,20 @@ public class Maze {
 
 	if (output.indexOf('E') != -1) {
 	    if (output.indexOf('E', output.indexOf('E')+1) != -1) {
-		throw new BadFileException("There is more than one Exit");
+		throw new IllegalArgumentException("There is more than one Exit");
 	    }
 	}
 	else {
-	    throw new BadFileException("There is no Exit");
+	    throw new IllegalArgumentException("There is no Exit");
 	}
 	
 	if (output.indexOf('S') != -1) {
 	    if (output.indexOf('S', output.indexOf('S')+1) != -1) {
-		throw new BadFileException("There is more than one Start");
+		throw new IllegalArgumentException("There is more than one Start");
 	    }
 	}
 	else {
-	    throw new BadFileException("There is no Start");
+	    throw new IllegalArgumentException("There is no Start");
 	}
 
 	maze = new char[rows][cols];
@@ -70,9 +70,16 @@ public class Maze {
     public boolean solve(){
 	int startr=-1,startc=-1;
 	//Initialize starting row and startint col with the location of the S. 
-	
-            maze[startr][startc] = ' ';//erase the S, and start solving!
-            return solve(startr,startc);
+	for (int row = 0;row < maze.length;row++) {
+	    for (int col = 0;col < maze[row].length;col++) {
+		if (maze[row][col] == 'S') {
+		    startr = row;
+		    startc = col;
+		}
+	    }
+	}
+	maze[startr][startc] = ' ';//erase the S, and start solving!
+	return solve(startr,startc);
     }
     
     /*
@@ -93,9 +100,26 @@ public class Maze {
             System.out.println("\033[2J\033[1;1H"+this);
             wait(20);
         }
-	
-        //COMPLETE SOLVE
+	if (maze[row][col] == 'E') {
+	    return true;
+	}
+	if (maze[row][col] == ' ') {
+	    maze[row][col] = '@';
+	    if (solveHel(row, col)) {
+		return true;
+	    }
+	    else {
+		maze[row][col] = ' ';
+	    }
+	}
         return false; //so it compiles
+    }
+
+    private boolean solveHel(int row, int col) {
+	return ((row + 1 < maze.length && solve(row + 1, col)) ||      //Down
+		(row - 1 >= 0 && solve(row - 1, col)) ||                //Up
+		(col + 1 < maze[row].length && solve(row, col + 1)) || //Right
+		(col - 1 >= 0 && solve(row, col - 1)));                 //Left
     }
     
 }
