@@ -5,45 +5,51 @@ public class Maze {
     private char[][] maze;
     private boolean animate;
 
-    public Maze(String filename) throws FileNotFoundException {
-	File infile = new File(filename);
-	Scanner inf = new Scanner(infile);
-	int rows = 0;
-	int cols = 0;
-	String output = "";
-	while (inf.hasNextLine()) {
-	    String line = inf.nextLine();
-	    cols = line.length();
-	    rows++;
-	    output += line;
-	}
-
-	if (output.indexOf('E') != -1) {
-	    if (output.indexOf('E', output.indexOf('E')+1) != -1) {
-		throw new IllegalArgumentException("There is more than one Exit");
+    public Maze(String filename) {
+	try {
+	    File infile = new File(filename);
+	    Scanner inf = new Scanner(infile);
+	    int rows = 0;
+	    int cols = 0;
+	    String output = "";
+	    while (inf.hasNextLine()) {
+		String line = inf.nextLine();
+		cols = line.length();
+		rows++;
+		output += line;
 	    }
-	}
-	else {
-	    throw new IllegalArgumentException("There is no Exit");
-	}
-	
-	if (output.indexOf('S') != -1) {
-	    if (output.indexOf('S', output.indexOf('S')+1) != -1) {
-		throw new IllegalArgumentException("There is more than one Start");
+	    
+	    if (output.indexOf('E') != -1) {
+		if (output.indexOf('E', output.indexOf('E')+1) != -1) {
+		    throw new IllegalArgumentException("There is more than one Exit");
+		}
 	    }
+	    else {
+		throw new IllegalArgumentException("There is no Exit");
+	    }
+	    
+	    if (output.indexOf('S') != -1) {
+		if (output.indexOf('S', output.indexOf('S')+1) != -1) {
+		    throw new IllegalArgumentException("There is more than one Start");
+		}
+	    }
+	    else {
+		throw new IllegalArgumentException("There is no Start");
+	    }
+	    
+	    maze = new char[rows][cols];
+	    for (int n = 0;n < output.length();n++) {
+		int tRow = n / cols;
+		int tCol = n % cols;
+		maze[tRow][tCol] = output.charAt(n);
+	    }
+	    
+	    animate = false;
 	}
-	else {
-	    throw new IllegalArgumentException("There is no Start");
+	catch (FileNotFoundException e) {
+	    System.out.println("Error: File not Found");
+	    System.exit(0);
 	}
-
-	maze = new char[rows][cols];
-	for (int n = 0;n < output.length();n++) {
-	    int tRow = n / cols;
-	    int tCol = n % cols;
-	    maze[tRow][tCol] = output.charAt(n);
-	}
-
-	animate = false;
     }
 		
     private void wait(int millis){ //ADDED SORRY!
@@ -121,5 +127,23 @@ public class Maze {
 		(col + 1 < maze[row].length && solve(row, col + 1)) || //Right
 		(col - 1 >= 0 && solve(row, col - 1)));                 //Left
     }
-    
+
+    public String toString() {
+	String ans = "";
+	for (int row = 0;row < maze.length;row++) {
+	    for (int col = 0;col < maze[row].length;col++) {
+		ans += maze[row][col];
+	    }
+	    ans += "\n";
+	}
+	return ans;
+    }
+    /*
+    public static void main(String[]args) {
+	Maze f = new Maze("data5.dat");
+	f.setAnimate(true);
+	f.solve();
+	System.out.println(f);
+    }
+    */
 }
