@@ -60,7 +60,7 @@ public class QueenBoard {
 	if (board.length == 2 || board.length == 3) {
 	    n = 0;
 	}
-	if (n != -1) {
+	if (!(n == -1 || n == 0)) {
 	    n += 1;
 	}
 	solutionCount = n;

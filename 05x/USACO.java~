@@ -1,0 +1,20 @@
+import java.util.*;
+import java.io.*;
+
+public class USACO {
+    public USACO() {}
+    public int bronze(String filename) {
+	Scanner in = null;
+	try {
+	    in = new Scanner(new File(filename));
+	}
+	catch (FileNotFoundException e) {
+	    System.out.println("Error 404: File Not Found.");
+	    System.exit(0);
+	}
+
+	Scanner
+    }
+
+    public int silver(String filename);
+}
