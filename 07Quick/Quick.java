@@ -5,14 +5,29 @@ public class Quick {
 	//-When done returns the index of the final position of the pivot element.      
 	//    (Should be from start to end inclusive)
 	//int pivot = (int)(Math.random() * (end-start) + start);
-	int pivotElement = data[(int)(Math.random() * data.length)];
-	int pIndex = 0; //partitionedIndex
+	int pivot = (int)(Math.random() * data.length);
+	int pivotElement = data[pivot];
+	int pIndexS = start; //partitionedIndex for SMALLER
+	int pIndexE = end; //partitionedIndex for LARGER
 	for (int n = start;start <= end;n++) {
+	    if (PivotElement == data[n]) continue;
+	    if (PivotElement < data[n]) {
+		if (n < pivot) {
+		    pIndexS++;
+		    continue;
+		}
+		else {
+		    int temp = data[pIndexS];
+		    data[pIndexS] = data[pIndexE];
+		    data[pIndexE] = temp;
+		    pIndexS++;
+		    pIndexE--;
+		}
 	    if (pivotElement > data[n]) {
-		int temp = data[pIndex];
-		data[pIndex] = data[n];
+		int temp = data[pIndexE];
+		data[pIndexE] = data[n];
 		data[n] = temp;
-		pIndex++;
+		pIndexE--;
 	    }
 	}
 	return data[]
