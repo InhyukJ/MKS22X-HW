@@ -1,0 +1,9 @@
+public class Partition {
+    public static int part(int[] data, int stasrt, int end) {
+	int pivotElement = data[(int)(Math.random() * (end - start) + start)];
+	int pIndexS = start;
+	int pIndexE = end;
+	boolean isDone = false;
+	while (!isDone) {
+	    int n = 
+	    while (data[pIndexS] > data])
