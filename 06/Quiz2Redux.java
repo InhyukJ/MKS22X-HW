@@ -23,4 +23,15 @@ public class Quiz2Redux{
 	help(words, str, temp + str.charAt(index), index+1);
 	help(words, str, temp, index+1);
     }
+    /*
+    public static void main(String[]args) {
+	ArrayList<String> test1 = combinations("kji");
+	int count = 0;
+	for (String str : test1) {
+	    System.out.print(str + " ");
+	    count++;
+	}
+	System.out.println(count);
+    }
+    */
 }
