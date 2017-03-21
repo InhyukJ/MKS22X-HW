@@ -1,28 +1,26 @@
-public class Quick {
-    public static void part(int[] data, int start, int end) {
+public class Quick2 {
+    public static int part(int[] data, int start, int end) {
 	//-Choose a random element to be a pivot, and partition the array around it. 
 	//-Only partition the elements from start to end inclusive.
 	//-When done returns the index of the final position of the pivot element.      
-	//    (Should be from start to end inclusive)	
-	int pivot = (int)(Math.random() * (end-start) + start);
-	int lt = start;
-	int i = start;
-	int gt = end;
-	while (i <= gt) {
-	    if (data[i] == data[pivot]) {
-		i++;
+	//    (Should be from start to end inclusive)
+	int pivotElement  = data[(int)(Math.random() * (end-start) + start)];
+	//System.out.println(pivotElement);
+	int pIndexS = start; //partitionedIndex for SMALLER
+	int pIndexE = end; //partitionedIndex for LARGER
+	int[] copy = new int[data.length];
+	for (int n = start;n <= end;n++) {
+	    if (pivotElement == data[n]) continue;
+	    if (pivotElement > data[n]) {
+		copy[pIndexS] = data[n];
+		pIndexS++;
 	    }
-	    else if (data[i] < data[pivot]) {
-		swap(data, i, lt);
-		lt++;
-		i++;
-	    }
-	    else {
-		swap(data, i, gt); 
-		gt--;
+	    if (pivotElement <= data[n]) {
+		copy[pIndexE] = data[n];
+		pIndexE--;
 	    }
 	}
-	swap()
+	return pIndexS; //this position will be left over for pivotElement
     }
     
     private void swap(int[] data, int index1, int index2) {
@@ -34,6 +32,8 @@ public class Quick {
     public static int quickSelect(int[] data, int k) {
 	//return the value that is the kth smallest value of the array. 
 	//use your partition method to help you accomplish this.
+	while (true) {
+	    
 	return 0;
     }
 
