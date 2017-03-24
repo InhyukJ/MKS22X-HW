@@ -1,16 +1,21 @@
 public class Quick {
-    public static void quicksort(int[] ary) {
+    public static void quickSort(int[] ary) {
 	qSortH(ary, 0, ary.length-1);
     }
 
-    private static void qSortH(int[] data, int start, int end) {
-	int pivot = (int)(Math.random() * (end-start) + start);
+    public static int quickSelect(int[] ary, int k) {
+	quickSort(ary);
+	return ary[k];
+    }
+
+    public static void qSortH(int[] data, int start, int end) {
+	if (start == end) return;
+	int pivot = (int)(Math.random() * (end-start) + start + 1);
 	int v = data[pivot];
 	//System.out.println("Pivot Element: "+data[pivot]);
 	int lt = start;
 	int i = start;
 	int gt = end;
-	if (start == end || start <= 1 || end >= data.length-1) return;
 	swap (data, pivot, end);
 	while (i <= gt) {
 	    if (data[i] == v) {
@@ -26,8 +31,8 @@ public class Quick {
 		gt--;
 	    }
 	}
-	qSortH(data, start, lt-1);
-	qSortH(data, gt+1, end);
+	if (lt != 0) qSortH(data, start, lt-1);
+	if (gt != data.length-1) qSortH(data, gt, end);
     }
 
     private static void swap(int[] data, int index1, int index2) {
@@ -69,7 +74,7 @@ public class Quick {
     */
     public static void main(String[]args) {
 	int[] test1 = {1,4,7,5,3,2,4,5,4,8};
-	quicksort(test1);
+	qSortH(test1, 0, test1.length-1);
 	String test1Str = "";
 	for (int i : test1) {
 	    test1Str += i + " ";
