@@ -17,7 +17,7 @@ public class Merge {
 	    int[] left = new int[splitIndex];
 	    int[] right = new int[ary.length - splitIndex];
 	    for (int l = 0;l < left.length;l++) left[l] = ary[l];
-	    for (int r = 0;r < right.length;r++) right[r] = ary[l+r];
+	    for (int r = 0;r < right.length;r++) right[r] = ary[left.length+r];
 	    mergeSort(left);
 	    mergeSort(right);
 	    int[] newAry = mergeTwo(left, right);
@@ -25,15 +25,36 @@ public class Merge {
 	}
     }
 
-    private static int[] mergeTwo(int[] left, int[] right) {
+    private static int[] mergeTwo(int[] left, int[] right) { //merging two sorted arrays
 	int[] newAry = new int[left.length + right.length];
-	int lessIndex = Math.min(left.length, right.length);
-	int moreIndex = Math.max(left.length, right.length);
-	int n = 0;
-	while (n < lessIndex) {
-
-
-	    n++;
+	int i = 0;
+	int n = 0; //left Index
+	int m = 0; //right Index
+	while (n < left.length) {
+	    if (m == right.length) {
+		for (int a = n;a < left.length;a++) {
+		    newAry[i] = left[a];
+		    i++;
+		}
+	    }
+	    else if (left[n] < right[m]) {
+		newAry[i] = left[n];
+		n++;
+		i++;
+	    }
+	    
+	    else {
+		newAry[i] = right[m];
+		m++;
+		i++;
+	    }
 	}
+	if (m < right.length) {
+	    for (int b = m;b < right.length;b++) {
+		newAry[i] = right[b];
+		i++;
+	    }
+	}
+	return newAry;
     }
 }
