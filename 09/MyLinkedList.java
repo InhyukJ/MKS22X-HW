@@ -1,6 +1,8 @@
+import java.util.*;
+
 public class MyLinkedList {
     private LNode start, end;
-    private int size;
+    private int size
 
     private class LNode {
 	int value;
@@ -8,27 +10,71 @@ public class MyLinkedList {
 
 	public LNode(int n) {
 	    value = n;
-	    next = null;
-	    prev = null;
 	}
 
 	public LNode(int n, LNode node) {
 	    value = n;
 	    next = node;
 	}
+
+	public String toString() {
+	    return value + "";
+	}
     }
 
     public MyLinkedList() {
-	start = null;
-	end = null;
-	size = 0;
     }
 
-    public boolean add1(int value) {
+    public int size() {
+	return size;
+    }
+
+    private LNode getNthNode(int n) {}
+
+    private boolean addAfter(int value) {
 	LNode n = new LNode(value, start);
 	start = n;
 	return true;
     }
+
+    private void remove(LNode target) {
+	LNode current = start;
+	if (target.prev == null || target.next == null) {
+	    if (size == 1) {
+		current.value = null;
+		size--;
+	    }
+	    else if (target.prev == null) {
+		start = target.next;
+		target.next.prev = null;
+		size--;
+	    }
+	    else if (target.next == null) {
+		end = target.prev;
+		target.prev.next = null;
+		size--;
+	    }
+	    else {
+		target.prev.next = target.next;
+		target.next.prev = target.prev;
+	    }
+	}
+    }
+    
+    public String toString() {
+	LNode current = start;
+	String ans = "[";
+	for (int n = 0;n < size;n++) {
+	    if (current == null) return "Error";
+	    if (n == size-1) return ans += current.value + "]"; 
+	    else {
+		ans += current.value + ", ";
+		current = current.next;
+	    }
+	}
+	return ans;
+    }
+
 
     public boolean add(int value) {
 	LNode current = start;
@@ -40,10 +86,6 @@ public class MyLinkedList {
 	}
 	size++;
 	return true;
-    }
-
-    public int size() {
-	return size;
     }
 
     public int get(int index) {
@@ -67,22 +109,23 @@ public class MyLinkedList {
 	current.value = newValue;
 	return temp;
     }
-    
 
-    public String toString() {
+    public int indexOf(int value) {
 	LNode current = start;
-	String ans = "[";
-	for (int n = 0;n < size;n++) {
-	    if (current == null) return "Error";
-	    if (n == size-1) return ans += current.value + "]"; 
-	    else {
-		ans += current.value + ", ";
-		current = current.next;
-	    }
+	int counter = 0;
+	while (current.value != value) {
+	    counter++;
+	    current = current.next;
 	}
-	return ans;
+	return counter;
     }
 
+    public int remove(int index) {
+	return 0;
+    }
+
+    public void add(int index, int value) {}
+    
     public static void main(String[]args) {
 	MyLinkedList a = new MyLinkedList();
 	a.add(10);
