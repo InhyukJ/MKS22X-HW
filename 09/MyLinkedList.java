@@ -2,7 +2,7 @@ import java.util.*;
 
 public class MyLinkedList {
     private LNode start, end;
-    private int size
+    private int size;
 
     private class LNode {
 	int value;
@@ -29,7 +29,15 @@ public class MyLinkedList {
 	return size;
     }
 
-    private LNode getNthNode(int n) {}
+    private LNode getNthNode(int n) {
+	LNode current = start;
+	int counter = 0;
+	while (counter < n) {
+	    current = current.next;
+	    counter++;
+	}
+	return current;
+    }
 
     private boolean addAfter(int value) {
 	LNode n = new LNode(value, start);
@@ -41,7 +49,8 @@ public class MyLinkedList {
 	LNode current = start;
 	if (target.prev == null || target.next == null) {
 	    if (size == 1) {
-		current.value = null;
+		start = null;
+		end = null;
 		size--;
 	    }
 	    else if (target.prev == null) {
@@ -78,7 +87,7 @@ public class MyLinkedList {
 
     public boolean add(int value) {
 	LNode current = start;
-	if (current == null) add1(value);
+	if (current == null) addAfter(value);
 	else {
 	    LNode newNode = new LNode(value);
 	    while(current.next != null) current = current.next;
@@ -121,7 +130,7 @@ public class MyLinkedList {
     }
 
     public int remove(int index) {
-	return 0;
+	
     }
 
     public void add(int index, int value) {}
