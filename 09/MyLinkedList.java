@@ -46,7 +46,7 @@ public class MyLinkedList {
     }
 
     private void remove(LNode target) {
-	LNode current = start;
+	//LNode current = start;
 	if (target.prev == null || target.next == null) {
 	    if (size == 1) {
 		start = null;
@@ -58,15 +58,16 @@ public class MyLinkedList {
 		target.next.prev = null;
 		size--;
 	    }
-	    else if (target.next == null) {
+	    else { //target.next == null
 		end = target.prev;
 		target.prev.next = null;
 		size--;
 	    }
-	    else {
-		target.prev.next = target.next;
-		target.next.prev = target.prev;
-	    }
+	}
+	else {
+	    target.prev.next = target.next;
+	    target.next.prev = target.prev;
+	    size--;
 	}
     }
     
@@ -130,10 +131,19 @@ public class MyLinkedList {
     }
 
     public int remove(int index) {
-	
+	LNode current = start;
+	int n = 0;
+	while (n < index) {
+	    current = current.next;
+	    n++;
+	}
+	remove(current);
     }
 
-    public void add(int index, int value) {}
+    public void add(int index, int value) {
+	LNode current = start;
+	
+    }
     
     public static void main(String[]args) {
 	MyLinkedList a = new MyLinkedList();
