@@ -93,6 +93,8 @@ public class MyLinkedList {
 	    LNode newNode = new LNode(value);
 	    while(current.next != null) current = current.next;
 	    current.next = newNode;
+	    newNode.prev = current;
+	    end = newNode;
 	}
 	size++;
 	return true;
@@ -137,12 +139,37 @@ public class MyLinkedList {
 	    current = current.next;
 	    n++;
 	}
+	int removed = current.value;
 	remove(current);
+	return removed;
     }
 
     public void add(int index, int value) {
-	LNode current = start;
-	
+	LNode newNode = new LNode(value);
+	if (index == 0) {
+	    newNode.next = start;
+	    start.prev = newNode;
+	    start = newNode;
+	    size++;
+	}
+	else if (index == size) {
+	    end.next = newNode;
+	    newNode.prev = end;
+	    end = newNode;
+	    size++;
+	}
+	else {
+	    LNode current = start;
+	    while (index != 0) {
+		current = current.next;
+		index--;
+	    }
+	    newNode.next = current;
+	    current.prev.next = newNode;
+	    newNode.prev = current.prev;
+	    current.prev = newNode;
+	    size++;
+	}
     }
     
     public static void main(String[]args) {
