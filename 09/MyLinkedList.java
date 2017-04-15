@@ -39,12 +39,16 @@ public class MyLinkedList {
 	return current;
     }
 
-    private boolean addAfter(int value) {
-	LNode n = new LNode(value, start);
-	start = n;
+    private boolean addAfter(LNode location, LNode toBeAdded) {
+	if (location.next == null) {
+	    end = toBeAdded;
+	}
+	location.next = toBeAdded;
+	toBeAdded.prev = location;
+	size++;
 	return true;
     }
-
+    
     private void remove(LNode target) {
 	//LNode current = start;
 	if (target.prev == null || target.next == null) {
@@ -88,9 +92,12 @@ public class MyLinkedList {
 
     public boolean add(int value) {
 	LNode current = start;
-	if (current == null) addAfter(value);
+	LNode newNode = new LNode(value);
+	if (current == null) {
+	    start = newNode;
+	    end = newNode;
+	}
 	else {
-	    LNode newNode = new LNode(value);
 	    while(current.next != null) current = current.next;
 	    current.next = newNode;
 	    newNode.prev = current;
@@ -133,33 +140,25 @@ public class MyLinkedList {
     }
 
     public int remove(int index) {
-	LNode current = start;
-	int n = 0;
-	while (n < index) {
-	    current = current.next;
-	    n++;
-	}
-	int removed = current.value;
-	remove(current);
+	LNode toBeRemoved = getNthNode(index);
+	int removed = toBeRemoved.value;
+	remove(toBeRemoved);
 	return removed;
     }
 
     public void add(int index, int value) {
 	LNode newNode = new LNode(value);
+	LNode current = start;
 	if (index == 0) {
-	    newNode.next = start;
-	    start.prev = newNode;
 	    start = newNode;
+	    newNode.next = current;
+	    current.prev = newNode;
 	    size++;
 	}
 	else if (index == size) {
-	    end.next = newNode;
-	    newNode.prev = end;
-	    end = newNode;
-	    size++;
+	    add(value);
 	}
 	else {
-	    LNode current = start;
 	    while (index != 0) {
 		current = current.next;
 		index--;
@@ -175,10 +174,18 @@ public class MyLinkedList {
     public static void main(String[]args) {
 	MyLinkedList a = new MyLinkedList();
 	a.add(10);
-	a.add(10000);
+	a.add(23);
+	a.add(41);
+	a.remove(2);
+	a.add(15);
+	a.add(5);
+	a.set(1,19);
+	a.add(0,1);
+	a.add(2, 23);
 	System.out.println(a);
-	//a.add(2);
-	//a.add(65);
+	System.out.println(a.size);
+	System.out.println(a.get(1));
+	//System.out.println(a.indexOf(15));
     }
 }
 	
