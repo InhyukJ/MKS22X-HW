@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MyLinkedList {
+public class MyLinkedList implements Iterable<Integer> {
     private LNode start, end;
     private int size;
 
@@ -170,6 +170,9 @@ public class MyLinkedList {
 	    size++;
 	}
     }
+
+    public Iterator<Integer> iterator() {
+	return 
     
     public static void main(String[]args) {
 	MyLinkedList a = new MyLinkedList();
