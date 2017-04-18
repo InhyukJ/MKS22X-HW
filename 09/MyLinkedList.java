@@ -206,19 +206,24 @@ public class MyLinkedList implements Iterable<Integer> {
     
     public static void main(String[]args) {
 	MyLinkedList a = new MyLinkedList();
-	a.add(10);
-	a.add(23);
-	a.add(41);
-	a.remove(2);
-	a.add(15);
-	a.add(5);
-	a.set(1,19);
-	a.add(0,1);
-	a.add(2, 23);
+	for (int i = 0;i < 20;i++) {
+	    a.add(i);
+	}
+	System.out.println("The data is:");
 	System.out.println(a);
-	System.out.println(a.size);
-	System.out.println(a.get(1));
-	//System.out.println(a.indexOf(15));
+	System.out.println();
+
+	System.out.println("Regular Loop:");
+	for (int i = 0;i < a.size();i++) {
+	    System.out.print(a.get(i) + " ");
+	}
+	System.out.println();
+
+	System.out.println("Iterable Loop:");
+	for (Integer i : a) {
+	    System.out.print(i + " ");
+	}
+	System.out.println();
     }
 }
 	
