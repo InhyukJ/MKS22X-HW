@@ -172,7 +172,37 @@ public class MyLinkedList implements Iterable<Integer> {
     }
 
     public Iterator<Integer> iterator() {
-	return 
+	return new LinkedListIterator(this);
+    }
+
+    public class LinkedListIterator implements Iterator<Integer> {
+	private int element;
+	private MyLinkedList LList;
+
+	public LinkedListIterator(MyLinkedList list) {
+	    LList = list;
+	    element = 0;
+	}
+
+	public Integer next() {
+	    if (hasNext()) {
+		int ans = LList.get(element);
+		element++;
+		return ans;
+	    }
+	    else {
+		throw new NoSuchElementException();
+	    }
+	}
+
+	public boolean hasNext() {
+	    return element < LList.size();
+	}
+
+	public void remove() {
+	    throw new UnsupportedOperationException();
+	}
+    }
     
     public static void main(String[]args) {
 	MyLinkedList a = new MyLinkedList();
