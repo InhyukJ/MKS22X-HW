@@ -1,27 +1,65 @@
 public class MyDeque {
-    private ArrayList<String> deque;
-    private int size, firstIndex, lastIndex;
+    private String[] deAry;
+    private int size, startIndex, endIndex;
 
-    /*
-    public MyDeque(ArrayList<Integer> ary) {
-	while (ary.length > size) {
-	    size += size;
-	}
-	for ()
-	if (ary.length > size) {
-	    size += size;
-    */
-
-    public MyDeque() {
-	deque = new ArrayList<String>();
-	size = 10;
-	firstIndex = 0;
-	lastIndex = 0;
+    public Mydeque() {
+	deAry = new String[10];
+	size = 0;
+	startIndex = 0;
+	endIndx = 0;
     }
 
-    public void addFirst(String str) {
-	if (str == null) throw new NullPointerException();
+    private void calStart() {
+	if (startIndex == 0) startIndex = size - 1;
 	else {
-	    if (firstIndex - 1 < 0 && deque[size-1] != null) {
-		size += size;
-		
+ 	    startIndex--;
+	}
+    }
+	    
+    
+    public void addFirst(String str) {
+	if (isFull()) reSize();
+	else {
+	    if (!(startIndex == endIndex && deAry[startIndex] == null)) calStart();
+	    deAry[startIndex] = str;
+	    size++;
+	}
+    }
+
+    private void calLast() {
+	if (endIndex == size - 1) endIndex = 0;
+	else {
+	    endIndex++;
+	}
+    }
+    
+    public void addLast(String str) {
+	if (isFull()) reSize();
+	else {
+	    if (!(startIndex == endIndex && deAry[startIndex] == null)) calLast();
+	    deAry[endIndex] = str;
+	    size++;
+	}
+    }
+
+    private boolean isFull() {
+	return size == deAry.length();
+    }
+
+    private void reSize() {
+	String[] newAry = new String[deAry.length * 2];
+	if (startIndex > endIndex) {
+	    for (int n = 0;n < deAry.length;n++) {
+		newAry[n] = deAry[n];
+	    }
+	}
+	else {
+	    for (int n = startIndex;n < (deAry.length - startIndex);n++) {
+		newAry[n + deAry.length] = deAry[n];
+	    }
+	    for (int n = 0;n <= endIndex;n++) {
+		newAry[n] = deAry[n];
+	    }
+	}
+    }
+}
