@@ -4,19 +4,19 @@ public class StackCalc {
     public static double eval(String str) {
 	String[] values = str.split(" ");
 	Stack<String> stack = new Stack<String>();
-	double ans = 0.0;
 
 	for (String element : values) {
 	    if (isOp(element)) {
 		String do1 = "" + stack.pop();
 		String do2 = "" + stack.pop();
-		ans += calculate(element, Double.parseDouble(do1), Double.parseDouble(do2));
+		double cal = calculate(element, Double.parseDouble(do1), Double.parseDouble(do2));
+		stack.push(""+ cal);
 	    }
 	    else {
 		stack.push(element);
 	    }
 	}
-	return ans;
+	return Double.parseDouble(stack.pop());
     }
 
     private static boolean isOp(String str) {
