@@ -1,0 +1,51 @@
+public class MyHeap {
+    private ArrayList<String> heap;
+    private int constant;
+    private int size;
+
+    public MyHeap() {
+	heap = new ArrayList<String>();
+	heap.add("filler");
+	constant = 1;
+	size = 0;
+    }
+
+    public MyHeap(boolean max) {
+	this();
+	if (!max) constant = -1;
+    }
+
+    public void add(String str) {
+	int child = size;
+	int parent = size / 2;
+	while (heap.get(child) > heap.get(parent)) {
+	    pushUp(child);
+	    child = parent;
+	    parent /= 2;
+	}
+    }
+
+    public String remove() {
+	int child = 2;
+	int parent = 1;
+	while (heap.get(child) < heap.get(parent)) {
+	    pushDown(parent);
+	    parent = child;
+	    child *= 2;
+	}
+    }
+
+    public String peek() {
+	return heap.get(1);
+    }
+
+    private void pushUp(int index) {
+	int temp = heap.get(index);
+	heap.set(index, heap.get(index/2));
+	heap.set(index/2, temp);
+    }
+
+    private void pushDown(int index) {
+
+    }
+}
