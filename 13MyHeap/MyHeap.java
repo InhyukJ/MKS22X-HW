@@ -66,11 +66,19 @@ public class MyHeap {
 
     private void moveDown() {
 	int parent = 1;
-	int child = 3;
+	int child = 2;
 	while (child <= size && compare(heap.get(parent), heap.get(child)) < 0) {
-	    swap(parent, child);
-	    parent = child;
-	    child = parent * 2;
+	    if (compare(heap.get(child), heap.get(child+1)) < 0) {
+		child++;
+		swap(parent, child);
+		parent = child;
+		child = parent * 2 - 1;
+	    }
+	    else {
+		swap(parent, child);
+		parent = child;
+		child = parent * 2;
+	    }
 	}
     }
 

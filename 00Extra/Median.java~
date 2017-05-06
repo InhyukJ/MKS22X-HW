@@ -1,0 +1,6 @@
+/*
+         take list
+O(nLogn) sort O(nLogn)
+         getMedian O(1)
+
+ */
