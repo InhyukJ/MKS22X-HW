@@ -1,0 +1,12 @@
+import java.util.ArrayList;
+
+public class RunningMedian {
+    
+    public RunningMedian() {
+	MyHeap();
+    }
+
+    public double getMedian() {
+	ArrayList<Integer> intHeap = new ArrayList<Integer>(this);
+	MyHeap heap = new MyHeap(intHeap);
+	
