@@ -17,6 +17,10 @@ public class MyHeap {
 	if (!max) constant = -1;
     }
 
+    public int getSize() {
+	return size;
+    }
+    
     public void add(int n) {
 	Integer i = new Integer(n);
 	heap.add(i);
