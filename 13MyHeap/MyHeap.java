@@ -18,16 +18,6 @@ public class MyHeap {
     }
 
     public void add(String str) {
-	/*
-	int child = size;
-	int parent = size / 2;
-	while (compare(heap.get(parent), heap.get(child)) < 0) {
-	    pushUp(child);
-	    child = parent;
-	    parent /= 2;
-	}
-	size++;
-	*/
 	heap.add(str);
 	size++;
 	int child = size;
