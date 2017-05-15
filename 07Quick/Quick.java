@@ -1,11 +1,21 @@
 public class Quick {
-    public static void quickSort(int[] ary) {
-	qSortH(ary, 0, ary.length-1);
+    public static void quicksort(int[] ary) {
+	if (ary.length <= 0) {
+	    throw new IllegalStateException("The list is empty");
+	}
+	else {
+	    qSortH(ary, 0, ary.length-1);
+	}
     }
 
     public static int quickSelect(int[] ary, int k) {
-	quickSort(ary);
-	return ary[k];
+	if (ary.length <= 0) {
+	    throw new IllegalStateException("The list is empty");
+	}
+	else {
+	    quicksort(ary);
+	    return ary[k];
+	}
     }
 
     public static void qSortH(int[] data, int start, int end) {
