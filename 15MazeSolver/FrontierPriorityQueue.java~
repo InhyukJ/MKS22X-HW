@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class FrontierPriorityQueue implements Frontier {
+    PriorityQueue<Location> pQueue;
+    
+    public FrontierPriorityQueue() {
+	pQueue = new PriorityQueue<Location>();
+    }
+
+    public void add(Location loc) {
+	pQueue.add(loc);
+    }
+
+    public Location next() {
+	if (pQueue.size() == 0) return NullPointerException();
+	else return pQueue.remove(0);
+    }
+}
+
