@@ -26,71 +26,44 @@ public class Merge {
 	    merge(left, right, ary);
 	}
     }
-
-    /*
-    private static int[] mergeTwo(int[] left, int[] right) { //merging two sorted arrays
-	int[] newAry = new int[left.length + right.length];
-	int i = 0;
+    public static void merge(int[] left, int[] right, int[] destination) {
 	int n = 0; //left Index
 	int m = 0; //right Index
-	while (n < left.length) {
-	    if (m == right.length) {
-		for (int a = n;a < left.length;a++) {
-		    newAry[i] = left[a];
+	int i = 0; //destination Index;
+
+	while (i < destination.length) {
+	    if (n == left.length) {
+		while (m < right.length) {
+		    destination[i] = right[m];
 		    i++;
+		    m++;
 		}
 	    }
-	    else if (left[n] < right[m]) {
-		newAry[i] = left[n];
-		n++;
-		i++;
-	    }
-	    
-	    else {
-		newAry[i] = right[m];
-		m++;
-		i++;
-	    }
-	}
-	if (m < right.length) {
-	    for (int b = m;b < right.length;b++) {
-		newAry[i] = right[b];
-		i++;
-	    }
-	}
-	return newAry;
-    }
-    */
-
-    public static void merge(int[] left, int[] right, int[] destination) {
-	int i = 0;
-	int n = 0; //left Index
-	int m = 0; //right Index
-	while (n < left.length) {
-	    if (m == right.length) {
-		for (int a = n;a < left.length;a++) {
-		    destination[i] = left[a];
+	    else if (m == right.length) {
+		while (n < left.length) {
+		    destination[i] = left[n];
 		    i++;
+		    n++;
 		}
 	    }
 	    else if (left[n] < right[m]) {
 		destination[i] = left[n];
+		i++;
+		n++;
+	    }
+	    else if (right[m] < left[n]) {
+		destination[i] = right[m];
+		i++;
+		m++;
+	    }
+	    else if (left[n] == right[m]) {
+		destination[i] = left[n];
 		n++;
 		i++;
-	    }
-	    
-	    else {
 		destination[i] = right[m];
 		m++;
 		i++;
 	    }
 	}
-	if (m < right.length) {
-	    for (int b = m;b < right.length;b++) {
-		destination[i] = right[b];
-		i++;
-	    }
-	}
-	return;
     }
 }
