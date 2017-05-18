@@ -1,17 +1,15 @@
-import java.util.*;
-
-public class FrontierQueue<Location> implements Frontier, Queue<Location> {
-    private Location[] fQueue;
+public class FrontierQueue implements Frontier {
+    private ArrayList<Location> fQueue;
 
     public FrontierQueue {
-	fQueue = new Location[];
+	fQueue = new ArrayList<Location>();
     }
-
+    
     public void add(Location loc) {
-	fQueue.add(loc);
+	fQueue.add(0, loc);
     }
 
     public Location next() {
-	fQueue.remove(fQueue.length - 1);
+	return fQueue.remove(fQueue.length - 1);
     }
 }
