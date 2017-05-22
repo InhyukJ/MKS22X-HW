@@ -18,6 +18,12 @@ public class Maze{
     public Location getEnd(){
 	return end;
     }
+
+    public int getMaxR() {return maxRows;}
+    public int getMaxC() {return maxCols;}
+
+    //public int getRow() {return row;}
+    //public int getCol() {return col;}
     
     private static String go(int x,int y){
 	return ("\033[" + x + ";" + y + "H");

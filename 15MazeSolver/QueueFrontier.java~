@@ -1,7 +1,7 @@
-public class FrontierQueue implements Frontier {
+public class QueueFrontier implements Frontier {
     private ArrayList<Location> fQueue;
 
-    public FrontierQueue {
+    public QueueFrontier {
 	fQueue = new ArrayList<Location>();
     }
     

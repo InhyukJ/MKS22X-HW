@@ -1,20 +1,24 @@
 import java.util.*;
 
-public class MyHeap {
+public class PriorityQueueFrontier implements Frontier {
     private ArrayList<Location> heap;
     private int constant;
     private int size;
-
-    public MyHeap() {
+    
+    public PriorityQueueFrontier() {
 	heap = new ArrayList<Location>();
-	heap.add(null);
+	heap.add(new Location(0, 0, null, 0, 0, false));
 	constant = 1;
 	size = 0;
     }
-
-    public MyHeap(boolean max) {
+    
+    public PriorityQueueFrontier(boolean max) {
 	this();
 	if (!max) constant = -1;
+    }
+
+    public int getSize() {
+	return size;
     }
 
     public void add(Location loc) {
@@ -50,14 +54,12 @@ public class MyHeap {
     public int compare(Location loc1, Location loc2) {
 	return loc1.compareTo(loc2) * constant;
     }
-
     
-
     public Location peek() {
-	if (size == 0) throw new NoSuchElementExeption("Empty!");
+	if (size == 0) throw new IndexOutOfBoundsException("Empty!");
 	else return heap.get(1);
     }
-
+    
     private void moveDown() {
 	int parent = 1;
 	int child = 2;
@@ -74,5 +76,9 @@ public class MyHeap {
 		child = parent * 2;
 	    }
 	}
+    }
+
+    public Location next() {
+	return remove();
     }
 }

@@ -1,15 +1,21 @@
+import java.util.Stack;
+
 public class StackFrontier implements Frontier {
-    private ArrayList<Location> fStack;
+    private Stack<Location> fStack;
     
-    public StackFrontier {
-	fStack = new ArrayList<Location>();
+    public StackFrontier() {
+	fStack = new Stack<Location>();
+    }
+
+    public int getSize() {
+	return fStack.size();
     }
 
     public void add(Location loc) {
-	fStack.add(loc);
+	fStack.push(loc);
     }
 
-    public Location remove() {
-	return fStack.remove(fStack.size - 1);
+    public Location next() {
+	return fStack.pop();
     }
 }
