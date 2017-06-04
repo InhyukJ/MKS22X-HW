@@ -67,7 +67,7 @@ public class MyDeque {
 	    //startIndex will always be zero in this case
 	}
 	else {
-	    for (int n = startIndex;n < (deAry.length - startIndex);n++) {
+	    for (int n = startIndex;n < deAry.length;n++) {
 		newAry[n + deAry.length] = deAry[n];
 	    }
 	    startIndex += deAry.length;
@@ -141,17 +141,24 @@ public class MyDeque {
 	}
 	return ans;
     }
-    
+    /*
     public static void main(String[]args) {
-	MyDeque ary1 = new MyDeque();
-        for (int n = 0;n < ary1.deAry.length;n++) {
-	    ary1.addLast(n+"");
+	MyDeque a = new MyDeque();
+	for (int n = 0;n < 10;n++) {
+	    a.addLast(n+2 + "");
 	}
-	ary1.addLast("10");
-	ary1.removeFirst();
-	ary1.removeLast();
-	System.out.println(ary1.getFirst());
-	System.out.println(ary1.getLast());
-	System.out.println(ary1);
+	for (int n = 0;n < 3;n++) {
+	    a.removeFirst();
+	    a.addLast(12+n + "");
+	}
+	System.out.println(a);
+	System.out.println("startIndex: " + a.startIndex);
+	System.out.println("endIndex: " + a.endIndex);
+	a.reSize();
+	System.out.println();
+	System.out.println(a);
+	System.out.println("startIndex: " + a.startIndex);
+	System.out.println("endIndex: " + a.endIndex);
     }
+    */
 }
