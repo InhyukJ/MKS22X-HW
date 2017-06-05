@@ -1,38 +1,41 @@
 import java.util.*;
 
 public class StackCalc {
+    private static boolean isOp(String str) {
+	return (str.equals("+") ||
+		str.equals("-") ||
+		str.equals("/") ||
+		str.equals("*") ||
+		str.equals("%"));
+    }
+
+    private static double calc(String op, double do1, double do2) {
+	if (op.equals("+")) return do2 + do1;
+	else if (op.equals("-")) return do2 - do1;
+	else if (op.equals("/")) return do2 / do1;
+	else if (op.equals("*")) return do2 * do1;
+	else return do2 % do1;
+    }
+
     public static double eval(String str) {
 	String[] values = str.split(" ");
-	Stack<String> stack = new Stack<String>();
+	Stack<String> stk = new Stack<String>();
 
-	for (String element : values) {
-	    if (isOp(element)) {
-		String do1 = "" + stack.pop();
-		String do2 = "" + stack.pop();
-		double cal = calculate(element, Double.parseDouble(do1), Double.parseDouble(do2));
-		stack.push(""+ cal);
+	for (String s : values) {
+	    if (isOp(s)) {
+		stk.push(calc(s, Double.parseDouble(stk.pop()), Double.parseDouble(stk.pop())) + "");
 	    }
 	    else {
-		stack.push(element);
+		stk.push(s);
 	    }
 	}
-	return Double.parseDouble(stack.pop());
+	return Double.parseDouble(stk.pop());
     }
 
-    private static boolean isOp(String str) {
-	return (str == "+" ||
-		str == "-" ||
-		str == "*" ||
-		str == "/" ||
-		str == "%");
-    }
-
-    private static double calculate(String op, double do1, double do2) {
-	if (op == "+") return do1 + do2;
-	else if (op == "-") return do1 - do2;
-	else if (op == "*") return do1 * do2;
-	else if (op == "/") return do1 / do2;
-	else return do1 % do2;
+    public static void main(String[]args) {
+	System.out.println(StackCalc.eval("108 212 + 525 -"));
+	System.out.println(StackCalc.eval("108 212 +"));
+	System.out.println(StackCalc.eval("310 525 -"));
+	
     }
 }
-	    
